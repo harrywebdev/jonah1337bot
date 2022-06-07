@@ -4,6 +4,7 @@
 namespace App\Command;
 
 use App\MessageProcess\IgnoreNotAllowedSenders;
+use App\MessageProcess\IgnoreTextMessages;
 use Telegram\Bot\Api;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -29,24 +30,32 @@ class BotGetUpdatesCommand extends Command
             'timeout' => 5,
         ]);
 
+        $skippedUpdates = [];
+
         /** @var Update $update */
         foreach ($updates as $update) {
             /** @var Message $message */
             $message = $update->getMessage();
 
             try {
-                // ignore msgs from unknown ppl
                 IgnoreNotAllowedSenders::handle($message);
+                IgnoreTextMessages::handle($message);
             } catch (\Exception $e) {
                 $output->writeln('<error>' . $e->getMessage() . '</error>');
+                $skippedUpdates [] = $update;
                 continue;
             }
+
+            // we care about text that is longer than 50 chars (so assuming some kind
+            // of better insight/message
 
             // now process the message
             $output->writeln('Processing msg: ' . $message->getMessageId());
         }
 
 //        dd($updates);
+
+//        dd($skippedUpdates);
 
         // this method must return an integer number with the "exit status code"
         // of the command. You can also use these constants to make code more readable
