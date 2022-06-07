@@ -1,6 +1,6 @@
 {
     "require": {
-        "irazasyed/telegram-bot-sdk": "^2.0",
+        "irazasyed/telegram-bot-sdk": "^3.6",
         "vlucas/phpdotenv": "^5.4",
         "symfony/console": "^6.0"
     },
