@@ -26,11 +26,11 @@ class BotCheckCommand extends Command
         $username  = $response->getUsername();
 
         $output->writeln("=======================");
-        $output->writeln("Check successful. Info:");
+        $output->writeln("<info>Check successful.</info>");
         $output->writeln("=======================");
-        $output->writeln("Bot Id: $botId");
-        $output->writeln("First Name: $firstName");
-        $output->writeln("Username: $username");
+        $output->writeln("Bot Id: <info>$botId</info>");
+        $output->writeln("First Name: <info>$firstName</info>");
+        $output->writeln("Username: <info>$username</info>");
         $output->writeln("=======================");
 
         // this method must return an integer number with the "exit status code"
