@@ -13,6 +13,7 @@
         }
     },
     "scripts": {
-        "check": "php src/app.php bot:check"
+        "check": "php src/app.php bot:check",
+        "updates": "php src/app.php bot:updates"
     }
 }
